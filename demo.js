@@ -65,6 +65,20 @@ function init() {
     renderer.shadowMap.type = THREE.BasicShadowMap;
     document.body.appendChild(renderer.domElement);
 
+    this.euler = new THREE.Euler(0, 0, 0, 'YXZ');
+    this.rotationSpeed = Math.PI / 180;
+
+    document.addEventListener('mousemove', (e) => {
+        const movementX = e.movementX || e.mozMovementX || e.webkitMovementX || 0;
+        const movementY = e.movementY || e.mozMovementY || e.webkitMovementY || 0;
+
+        this.euler.y -= movementX * this.rotationSpeed;
+        this.euler.x -= movementY * this.rotationSpeed;
+        this.euler.x = Math.min(Math.max(this.euler.x, -1.0472), 1.0472);
+
+        this.camera.quaternion.setFromEuler(this.euler);
+    })
+
     animate();
 }
 

@@ -1,5 +1,7 @@
-const section = document.querySelector("section");
+import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
 
+const section = document.querySelector("section");
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -42,16 +44,18 @@ scene.add( cube );
 
 camera.position.z = 6;
 
+const OrbitControls = new OrbitControls(camera, renderer.domElement);
+
 function animate() {
     requestAnimationFrame( animate );
 
-    const currentTimeline = window.pageYOffset / 3000;
+    // const currentTimeline = window.pageYOffset / 3000;
     
-    const rx = currentTimeline * Math.PI;
-    const ry = currentTimeline * Math.PI * 2;
-    const rz = currentTimeline * Math.PI * 3;
+    // const rx = currentTimeline * Math.PI;
+    // const ry = currentTimeline * Math.PI * 2;
+    // const rz = currentTimeline * Math.PI * 3;
 
-    cube.rotation.set(rx, ry , rz);
+    // cube.rotation.set(rx, ry , rz);
 
     renderer.render( scene, camera );
 };

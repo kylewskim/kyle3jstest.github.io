@@ -1,5 +1,5 @@
-import * as THREE from 'https://unpkg.com/three/build/three.module.js';
-import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
+import * as THREE from './three.module.js';
+import { OrbitControls } from './OrbitControls.js';
 
 const section = document.querySelector("section");
 const scene = new THREE.Scene();
@@ -10,26 +10,34 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setClearColor( 0xffffff, 1);
 section.appendChild( renderer.domElement );
 
-const ambient = new THREE.AmbientLight(0x222222);
-scene.add(ambient);
+const ambient = new THREE.AmbientLight(0xffffff);
+//scene.add(ambient);
 
 const light = new THREE.DirectionalLight(0xffffff);
-light.position.set(0,0,6);
-// scene.add(light);
+light.position.set(10,5,6);
+light.wireframe = true;
+//scene.add(light);
 
-light1 = new THREE.PointLight(0xffffff, 2, 18);
-light1.position.set(5,3,10);
-light1.castShadow = true;
-light1.shadow.camera.near = 01;
+const light1 = new THREE.PointLight(0xffffff, 4.5, 18);
+light1.position.set(10,7,5);
+light1.castShadow = false;
+light1.shadow.camera.near = 1;
+light1.shadow.camera.far = 1;
+scene.add(light1);
+
+const light1 = new THREE.PointLight(0xffffff, 4.5, 18);
+light1.position.set(10,7,5);
+light1.castShadow = false;
+light1.shadow.camera.near = 1;
 light1.shadow.camera.far = 1;
 scene.add(light1);
 
 const loader = new THREE.TextureLoader();
 
 const urls = [
-    "edge.png", "spine.png",
-    "top.png", "bottom.png",
-    "front.png", "back.png"
+    "src/edge.png", "src/spine.png",
+    "src/top.png", "src/bottom.png",
+    "src/front.png", "src/back.png"
 ];
 
 const materials = urls.map(url => {
@@ -44,18 +52,18 @@ scene.add( cube );
 
 camera.position.z = 6;
 
-const OrbitControls = new OrbitControls(camera, renderer.domElement);
+const orbitControls = new OrbitControls(camera, renderer.domElement);
 
 function animate() {
     requestAnimationFrame( animate );
 
-    // const currentTimeline = window.pageYOffset / 3000;
+    //const currentTimeline = window.pageYOffset / 3000;
     
-    // const rx = currentTimeline * Math.PI;
-    // const ry = currentTimeline * Math.PI * 2;
-    // const rz = currentTimeline * Math.PI * 3;
+    //const rx = currentTimeline * Math.PI;
+    //const ry = currentTimeline * Math.PI * 2;
+    //const rz = currentTimeline * Math.PI * 3;
 
-    // cube.rotation.set(rx, ry , rz);
+    //cube.rotation.set(rx, ry , rz);
 
     renderer.render( scene, camera );
 };

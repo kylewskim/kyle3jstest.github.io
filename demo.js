@@ -14,23 +14,25 @@ const ambient = new THREE.AmbientLight(0xffffff);
 //scene.add(ambient);
 
 const light = new THREE.DirectionalLight(0xffffff);
-light.position.set(10,5,6);
+light.position.set(0,0,0);
 light.wireframe = true;
 //scene.add(light);
 
 const light1 = new THREE.PointLight(0xffffff, 4.5, 18);
-light1.position.set(10,7,5);
+light1.position.set(5,4,5);
 light1.castShadow = false;
 light1.shadow.camera.near = 1;
 light1.shadow.camera.far = 1;
-scene.add(light1);
+// scene.add(light1);
+camera.add(light1);
 
-const light1 = new THREE.PointLight(0xffffff, 4.5, 18);
-light1.position.set(10,7,5);
-light1.castShadow = false;
-light1.shadow.camera.near = 1;
-light1.shadow.camera.far = 1;
-scene.add(light1);
+const light2 = new THREE.PointLight(0xffffff, 4.5, 18);
+light2.position.set(-5,-3,-7);
+light2.castShadow = false;
+light2.shadow.camera.near = 1;
+light2.shadow.camera.far = 1;
+// scene.add(light2);
+camera.add(light2);
 
 const loader = new THREE.TextureLoader();
 
@@ -49,8 +51,9 @@ const materials = urls.map(url => {
 const geometry = new THREE.BoxGeometry(3.5, 5, 0.5);
 const cube = new THREE.Mesh( geometry, materials );
 scene.add( cube );
+scene.add(camera);
 
-camera.position.z = 6;
+camera.position.z = 10;
 
 const orbitControls = new OrbitControls(camera, renderer.domElement);
 
